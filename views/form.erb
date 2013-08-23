@@ -1,0 +1,59 @@
+<head>
+<style type="text/css">
+
+.formfield {
+  width: 25%;
+  vertical-align: middle; 
+}
+
+</style>
+</head>
+
+
+<form action="/form" method="post">
+  
+  <label for="username">Name:</label>
+  <input type="text" id="username" name="username">
+
+  <label for="teacher">Teacher:</label>
+  <input type="text" name="teacher">
+
+  <label for="due_date">Due Date:</label>
+  <input type="text" name="due_date">
+
+  <label for="class_number">Class:</label>
+  <input type="text" name="class_number">
+
+  <label for="filename">Title:</label>
+  <input type="text" name="filename">
+
+
+
+
+
+
+  <p class="formfield">
+    <label for="para1">Párafo 1: Breve acerca del contenido de la lectura</label>
+    <textarea style="height:100px; width:300px;" name="para1" id="para1"></textarea>
+  </p>
+
+  <p class="formfield">
+    <label for="para2">Párafo 2: Una lista de los componentes de la ciudad</label>
+    <textarea style="height:100px; width:300px;" name="para2" id="para2"></textarea>
+  </p>
+
+
+  <p class="formfield">
+    <label for="para3">Párafo 3: Una lasta de los sectores de poder</label>
+    <textarea style="height:100px; width:300px;" name="para3" id="para3"></textarea>
+  </p>
+
+
+  <p class="formfield">
+    <label for="para4" id="para4_label">Párafo 4: 1. Qué opina el autor de la ciudad? 2. Me gustaría vivir o haber vivido en esta ciudad? Por qué sí o por qué no? (cinco razones)</label>
+    <textarea style="height:100px; width:300px;" name="para4" id="para4"></textarea>
+  </p>
+
+  <input type="submit">
+</form>
+
