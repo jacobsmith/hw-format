@@ -1,0 +1,10 @@
+
+<h2>"Hello"</h2> 
+ 
+
+<% @documents.each do |document| %>
+  <%= link_to( html_escape(document["filename"]), '/edit/' + document["id"].to_s) %>
+  <% @document = document %>
+
+  <h2><%= html_escape(document.inspect) %></h2>
+<% end %> 
