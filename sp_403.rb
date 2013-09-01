@@ -87,7 +87,28 @@ post '/edit/:id' do
     :last_save => Time.now
   )
 
+  params = p
+  pdf = To_pdf.tarea_escrita(params)
+
+  File.open(pdf, "rb") do |file|
+    send_file(file, :disposition => 'attachment', :filename => params["filename"] + ".pdf")
+  end
+
 redirect '/all'
 
 end
 
+
+
+get '/print/:id' do
+  document = Tarea_Escrita.get(params[:id])
+
+
+  pdf = To_pdf.tarea_escrita(document)
+
+
+  File.open(pdf, "rb") do |file|
+    send_file(file, :disposition => 'attachment', :filename => params["filename"] + ".pdf")
+  end
+
+end

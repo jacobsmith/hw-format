@@ -3,7 +3,6 @@ class To_pdf
   def self.write(paragraph)
       return :text => paragraph, :leading => 20
     end
-
   def self.tarea_escrita(params)
     name = params[:username]
     teacher = params[:teacher]
@@ -19,10 +18,7 @@ class To_pdf
    header = [name, teacher, class_number, due_date] 
           
   tab = "#{Prawn::Text::NBSP}"*10
-  pdf = Prawn::Document.new(:margin => 72) do |pdf|
-   # default_leading 20
-
-
+  pdf = Prawn::Document.new(:margin => 72)  do |pdf|
     header.each do |info|
       pdf.text info, :leading => 20
     end
@@ -30,15 +26,22 @@ class To_pdf
     pdf.text filename, :align => :center, :leading => 20
 
     #Paragraph 1 
-    pdf.text paragraph1, :leading => 20 
+    pdf.text paragraph1, :leading => 20
 
     
     #Paragraph 2, with title
     pdf.text "Elementos de la ciudad:", :align => :center, :leading => 20   
 
     paragraph2.split(/\n/).each do |item|
-      pdf.text tab + "- " + item, :leading => 20
-    end
+      if item.strip =~ /[A-Z]+[ÁÉÍÓÚ]+[A-Z]/
+        pdf.text item, :leading => 20
+      elsif item == "\r"
+       pdf.text item
+      else 
+        pdf.text tab + "- " + item, :leading => 20
+      end
+
+     end
 
 
     #Paragraph 3, with title
