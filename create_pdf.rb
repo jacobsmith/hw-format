@@ -4,20 +4,24 @@ class To_pdf
       return :text => paragraph, :leading => 20
     end
 
-  def self.tarea_escrita(params)
-    name = params[:username]
-    teacher = params[:teacher]
-    due_date = params[:due_date]
-    class_number = params[:class_number]
-    filename = params[:filename]
+  def self.tarea_escrita(document)
+    name = document[:name]
+    teacher = document[:teacher]
+    due_date = document[:due_date]
+    class_number = document[:class_number]
+    filename = document[:filename]
   
-    paragraph1 = params[:para1]
-    paragraph2 = params[:para2] 
-    paragraph3 = params[:para3]
-    paragraph4 = params[:para4]
- 
+    paragraph1 = document[:para1]
+    paragraph2 = document[:para2] 
+    paragraph3 = document[:para3]
+    paragraph4 = document[:para4]
+
+
+
    header = [name, teacher, class_number, due_date] 
-          
+         
+
+  
   tab = "#{Prawn::Text::NBSP}"*10
   pdf = Prawn::Document.new(:margin => 72) do |pdf|
    # default_leading 20

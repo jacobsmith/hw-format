@@ -5,8 +5,9 @@
 <% @documents.each do |document| %>
 
   <li>
-  <%= link_to( html_escape(document["filename"]), '/edit/' + document["id"].to_s) %> 
+  <%= link_to( html_escape(document[:filename]), '/edit/' + document["id"].to_s) %> <%= link_to "Print", '/print/' + document[:id].to_s %> 
   </li>
 
+<% end %> 
 
-  <% end %> 
+<%= link_to("Create New", :form) %> 

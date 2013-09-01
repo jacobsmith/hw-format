@@ -17,19 +17,19 @@
 
   <p class="one_liners"> 
     <label for="username">Name:</label>
-    <input type="text" id="username" name="username" value=<%=@document.name%> >
+    <input type="text" id="username" name="username" value="<%= @document[:name] %>" >
 
     <label for="teacher">Teacher:</label>
-    <input type="text" name="teacher" value=<%=@document.teacher%> >
+    <input type="text" name="teacher" value="<%=@document.teacher%>">
 
     <label for="due_date">Due Date:</label>
-    <input type="text" name="due_date" value=<%=@document.due_date%> >
+    <input type="text" name="due_date" value="<%=@document.due_date%>" >
 
     <label for="class_number">Class:</label>
-    <input type="text" name="class_number" value=<%=@document.class_number%> >
+    <input type="text" name="class_number" value="<%=@document.class_number%>" >
 
     <label for="filename">Title:</label>
-    <input type="text" name="filename" value=<%=@document.filename%> >
+    <input type="text" name="filename" value="<%=@document.filename%>" >
   </p>
 
 
