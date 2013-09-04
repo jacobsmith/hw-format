@@ -27,9 +27,14 @@ class User
   include DataMapper::Resource
 #  has n, :documents
   property :id, Serial, :key => true 
-  property :username, String
-  property :real_name, String
+  property :email, String, :unique => true, :format => :email_address
+  property :real_name, String, :required => true
+  property :password_salt, String
+  property :password_hash, String
 end
+
+User.raise_on_save_failure = true 
+DataMapper::Logger.new($stdout, :debug)
 
 DataMapper.finalize
 DataMapper.auto_upgrade!

@@ -1,0 +1,11 @@
+<html>
+  
+  <head><% if login? %>
+      <%= "Welcome #{username}" %>
+    <% end %> 
+    </head>
+  
+  <body>
+    <%= yield %>
+  </body>
+</html>

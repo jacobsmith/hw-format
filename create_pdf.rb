@@ -46,6 +46,8 @@ class To_pdf
     paragraph2.split(/\n/).each do |item|
       if item.match(":")
         pdf.text item, :leading => 20
+      elsif item == "\r"
+        pdf.text item 
       else
       pdf.text tab + "- " + item, :leading => 20
       end 
