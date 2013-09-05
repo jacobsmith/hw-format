@@ -27,8 +27,8 @@ class User
   include DataMapper::Resource
 #  has n, :documents
   property :id, Serial, :key => true 
-  property :email, String, :unique => true, :format => :email_address
-  property :real_name, String, :required => true
+  property :email, String
+  property :real_name, String 
   property :password_salt, String
   property :password_hash, String
 end

@@ -8,6 +8,7 @@ require "./create_pdf.rb"
 include ERB::Util
 set :sessions, true
 set :session_secret, "you'll never guess this!"
+set :session_expire_after,  2592000 
 
 helpers do
     
@@ -26,9 +27,9 @@ helpers do
 end
 
 before do
-  puts "This is the session: " + session.inspect.to_s
-  user = User.all
-  puts user.inspect.to_s
+#  puts "This is the session: " + session.inspect.to_s
+#  user = User.all
+#  puts user.inspect.to_s
 end
 
 
@@ -135,16 +136,15 @@ post "/signup" do
   else 
     password_salt = BCrypt::Engine.generate_salt
     password_hash = BCrypt::Engine.hash_secret(p["password"], password_salt)
-
-    user = User.new
-    user.attributes = {
-     :email => p['email'],
-     :real_name => p['real_name'],
+ 
+    @user = User.new(
+     :email => p["email"],
+     :real_name => p["real_name"],
      :password_salt => password_salt,
      :password_hash => password_hash
-     }
-     puts user.valid?.to_s + ' is user valid?'
-    user.save!
+     )
+     puts @user.valid?.to_s + ' is user valid?'
+    @user.save!
 
    session[:username] = p["username"]
    redirect "/all"
@@ -156,10 +156,12 @@ get "/login" do
 end
 
 post "/login" do
+  puts params
  if User.first(:email => params[:email])
    user = User.first(:email => [params[:email]])
-   if user[:password_hash] == BCrypt::Engine.hash_secret(params[:password], user[:password_salt])
-     session[:username] = params[:username]
+   puts user.inspect.to_s
+   if user[:password_hash] == BCrypt::Engine.hash_secret(params[:password], user[:password_salt])     
+     session[:username] = user[:email] 
      redirect "/all"
    end
  else
@@ -175,3 +177,9 @@ get "/logout" do
  session.clear
    redirect "/"
 end
+
+get "/session" do
+#  session[:time] = Time.now 
+  erb :check_session
+end
+
