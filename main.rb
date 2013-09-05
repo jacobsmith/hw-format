@@ -50,8 +50,13 @@ end
 
 
 get '/all' do
-  @documents = Tarea_Escrita.all
-  erb :user_all 
+  if login? == true 
+    @documents = Tarea_Escrita.all(:user_id => User.first(:email => session[:username]).id)
+    erb :user_all
+  else
+    "Please " + link_to("log in", "/login") + " or " + link_to("sign up", "/signup") + " to continue." 
+  end
+
 end
 
 
@@ -71,11 +76,9 @@ post '/form' do
     :para4 => p["para4"],
     :created_at => Time.now
   )
-  user = User.first(:email => session[:username])
-  puts user
-  @document.user_id = user.id
-  puts @document.valid?
-  puts @document.inspect.to_s 
+
+  user = User.first(:email => session[:username]) 
+  @document.user_id = user.id 
   @document.save
 
   redirect '/all'

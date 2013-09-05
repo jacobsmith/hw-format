@@ -4,7 +4,8 @@
 <% @documents.all(:order => [:last_save.desc]).each do |document| %>
 
   <li>
-  <%= document.last_save %>
+  <%= document.last_save || document.created_at %>
+  <%= User.first(:id => document.user_id).email %>
   <%= link_to( html_escape(document[:filename]), '/edit/' + document["id"].to_s) %>
   <%= link_to "Print", '/print/' + document[:id].to_s %> 
   </li>
