@@ -13,7 +13,7 @@ class Document
   property :filename, String, :unique => true
   property :last_save, DateTime
   property :created_at, DateTime
-#  belongs_to :user
+  belongs_to :user
 end
 
 class Tarea_Escrita < Document
@@ -25,12 +25,13 @@ end
 
 class User
   include DataMapper::Resource
-#  has n, :documents
+  
   property :id, Serial, :key => true 
   property :email, String
   property :real_name, String 
   property :password_salt, String
   property :password_hash, String
+  has n, :documents
 end
 
 User.raise_on_save_failure = true 

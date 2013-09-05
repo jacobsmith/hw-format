@@ -28,8 +28,9 @@ end
 
 before do
 #  puts "This is the session: " + session.inspect.to_s
-#  user = User.all
-#  puts user.inspect.to_s
+  user = User.all
+  puts user.inspect.to_s
+  puts Tarea_Escrita.all.inspect.to_s
 end
 
 
@@ -70,6 +71,11 @@ post '/form' do
     :para4 => p["para4"],
     :created_at => Time.now
   )
+  user = User.first(:email => session[:username])
+  puts user
+  @document.user_id = user.id
+  puts @document.valid?
+  puts @document.inspect.to_s 
   @document.save
 
   redirect '/all'
