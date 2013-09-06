@@ -4,12 +4,13 @@
 <% @documents.all(:order => [:last_save.desc]).each do |document| %>
 
   <li>
-  <%= document.last_save || document.created_at %>
-  <%= User.first(:id => document.user_id).email %>
+  <%= format_time(document.last_save) || format_time(document.created_at) %>
+  <%= User.first(:id => document.user_id).real_name%>
   <%= link_to( html_escape(document[:filename]), '/edit/' + document["id"].to_s) %>
   <%= link_to "Print", '/print/' + document[:id].to_s %> 
   </li>
 
 <% end %> 
 
-<%= link_to("Create New", :form) %> 
+<%= link_to("Create New", :form) %>
+<p></p>

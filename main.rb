@@ -23,14 +23,20 @@ helpers do
   def username
     return session[:username]
   end
-        
+
+  def format_time(time)
+    return time.strftime("%d %b - %l:%M %P")  
+  end
+
 end
 
+
 before do
+  ### Using for low-tech debugging ###
 #  puts "This is the session: " + session.inspect.to_s
-  user = User.all
-  puts user.inspect.to_s
-  puts Tarea_Escrita.all.inspect.to_s
+#  user = User.all
+#  puts user.inspect.to_s
+#  puts Tarea_Escrita.all.inspect.to_s
 end
 
 
@@ -40,7 +46,7 @@ end
 
 
 get '/' do
-  link_to('Tarea Escrita', "/form")  
+  redirect '/all'  
 end
 
 
@@ -91,9 +97,7 @@ end
 
 
 post '/edit/:id' do
-  puts params[:id]
   entry = Tarea_Escrita.get(params[:id])
-
 
   p = params
   entry.update(
@@ -112,7 +116,6 @@ post '/edit/:id' do
 redirect '/all'
 
 end
-
 
 
 get '/print/:id' do
@@ -178,8 +181,6 @@ post "/login" do
    redirect "/logout"
  end 
 end
-
-
 
 get "/logout" do
  session[:username] = nil

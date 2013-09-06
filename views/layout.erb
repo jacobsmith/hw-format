@@ -7,5 +7,13 @@
   
   <body>
     <%= yield %>
+
+    <% #footer %> 
+    <%= link_to('All Documents', '/all') %>
+    <%= if login? 
+          link_to('Logout', '/logout')
+        else
+          link_to('Login', '/login')
+        end  %>
   </body>
 </html>
